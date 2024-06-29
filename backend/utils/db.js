@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-const mongo_url = process.env.MONGO_URL;
+const mongo_url = process.env.MONGODB_URL;
 
 export default function connect() {
   mongoose
