@@ -97,7 +97,6 @@ const Users = () => {
           {user.name}
         </div>
       </td>
-
       <td className="p-2">{user.title}</td>
       <td className="p-2">{user.email || "user.emal.com"}</td>
       <td className="p-2">{user.role}</td>
@@ -107,13 +106,12 @@ const Users = () => {
           onClick={() => userStatusClick(user)}
           className={clsx(
             "w-fit px-4 py-1 rounded-full",
-            user?.isActive ? "bg-blue-200" : "bg-yellow-100"
+            user?.status === "online" ? "bg-green-300" : "bg-red-300"
           )}
         >
-          {user?.isActive ? "Active" : "Disabled"}
+          {user.status}
         </button>
       </td>
-
       <td className="p-2 flex gap-4 justify-end">
         <Button
           className="text-blue-600 hover:text-blue-500 font-semibold sm:px-0"
