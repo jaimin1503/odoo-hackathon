@@ -71,6 +71,15 @@ const Login = () => {
               <p className="text-center text-base text-gray-700 ">
                 Keep all your credential safge.
               </p>
+              <p>
+                login credential
+              </p>
+              <p>
+                email:-dakshil@gmail.com
+              </p>
+              <p>
+                password:-dakshil
+              </p>
             </div>
 
             <div className="flex flex-col gap-y-5">
@@ -99,16 +108,7 @@ const Login = () => {
               <span className="text-sm text-gray-500 hover:text-blue-600 hover:underline cursor-pointer">
                 Forget Password?
               </span>
-              <div className="flex justify-between">
-                <span className="text-sm text-gray-500">
-                  If You Want To Become Admin Than Register
-                </span>
-                <Link to="/register">
-                  <span className="text-md text-gray-500 hover:text-blue-600 hover:underline cursor-pointer">
-                    Register
-                  </span>
-                </Link>
-              </div>
+              
 
               {isLoading ? (
                 <Loading />
