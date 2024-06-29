@@ -25,7 +25,8 @@ const TaskDialog = ({ task }) => {
   const [deleteTask] = useTrashTaskMutation();
   const [duplicateTask] = useDuplicateTaskMutation();
 
-  const duplicateHandler = async () => {
+  const duplicateHandler = async (e) => {
+    e.stopPropagation();
     try {
       const res = await duplicateTask(task._id).unwrap();
       toast.success(res?.message);
@@ -39,11 +40,14 @@ const TaskDialog = ({ task }) => {
     }
   };
 
-  const deleteClicks = () => {
+  const deleteClicks = (e) => {
+    e.stopPropagation();
+    console.log("deleteClicks");
     setOpenDialog(true);
   };
 
-  const deleteHandler = async () => {
+  const deleteHandler = async (e) => {
+    e.stopPropagation();
     try {
       const res = await deleteTask(task._id).unwrap();
       toast.success(res?.message);
@@ -61,30 +65,39 @@ const TaskDialog = ({ task }) => {
     {
       label: "Open Task",
       icon: <AiTwotoneFolderOpen className="mr-2 h-5 w-5" aria-hidden="true" />,
-      onClick: () => navigate(`/task/${task._id}`),
+      onClick: (e) => {
+        e.stopPropagation();
+        navigate(`/task/${task._id}`);
+      },
     },
     {
       label: "Edit",
       icon: <MdOutlineEdit className="mr-2 h-5 w-5" aria-hidden="true" />,
-      onClick: () => setOpenEdit(true),
+      onClick: (e) => {
+        e.stopPropagation();
+        setOpenEdit(true);
+      },
     },
     {
       label: "Add Sub-Task",
       icon: <MdAdd className="mr-2 h-5 w-5" aria-hidden="true" />,
-      onClick: () => setOpen(true),
+      onClick: (e) => {
+        e.stopPropagation();
+        setOpen(true);
+      },
     },
     {
       label: "Duplicate",
       icon: <HiDuplicate className="mr-2 h-5 w-5" aria-hidden="true" />,
-      onClick: () => duplicateHandler(),
+      onClick: duplicateHandler,
     },
   ];
 
   return (
     <>
       <div>
-        <Menu as="div" className="relative inline-block text-left">
-          <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-600 ">
+        <Menu as="div" className="relative inline-block text-left z-50">
+          <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-600">
             <BsThreeDots />
           </Menu.Button>
 
@@ -103,7 +116,7 @@ const TaskDialog = ({ task }) => {
                   <Menu.Item key={el.label}>
                     {({ active }) => (
                       <button
-                        onClick={el?.onClick}
+                        onClick={el.onClick}
                         className={`${
                           active ? "bg-blue-500 text-white" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -120,7 +133,7 @@ const TaskDialog = ({ task }) => {
                 <Menu.Item>
                   {({ active }) => (
                     <button
-                      onClick={() => deleteClicks()}
+                      onClick={deleteClicks}
                       className={`${
                         active ? "bg-blue-500 text-white" : "text-red-900"
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

@@ -1,6 +1,6 @@
 import { Transition } from "@headlessui/react";
 import clsx from "clsx";
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
@@ -8,6 +8,10 @@ import { Toaster } from "sonner";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Login from "./pages/Login";
+import TaskDetails from "./pages/TaskDetails";
+import Tasks from "./pages/Tasks";
+import Trash from "./pages/Trash";
+import Users from "./pages/Users";
 import Dashboard from "./pages/dashboard";
 import { setOpenSidebar } from "./redux/slices/authSlice";
 
@@ -95,6 +99,12 @@ function App() {
         <Route element={<Layout />}>
           <Route index path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tasks" element={<Tasks />} />
+          {/* for todo,inprogress,complete task route */}
+          <Route path="/:status" element={<Tasks />} />
+          <Route path="/team" element={<Users />} />
+          <Route path="/trashed" element={<Trash />} />
+          <Route path="/:status/task/:id" element={<TaskDetails />} />
         </Route>
 
         <Route path="/log-in" element={<Login />} />

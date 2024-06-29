@@ -1,6 +1,6 @@
 import React from "react";
 import TaskCard from "./TaskCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BoardView = ({ tasks }) => {
   return (
@@ -9,9 +9,11 @@ const BoardView = ({ tasks }) => {
         {tasks?.map((task, index) => {
           const key = `${task._id}_${index}`;
           return (
-            <Link to={`task/${task._id}`} key={key}>
-              <TaskCard task={task} key={index} />
-            </Link>
+            <div key={key}>
+              <Link to={`/tasks/task/${task._id}`}>
+                <TaskCard task={task} key={index} />
+              </Link>
+            </div>
           );
         })}
       </div>

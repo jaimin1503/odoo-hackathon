@@ -14,6 +14,7 @@ import { tasks } from "../assets/data";
 import Table from "../components/task/Table";
 import AddTask from "../components/task/AddTask";
 import { useGetAllTaskQuery } from "../redux/slices/api/taskApiSlice";
+import { useSelector } from "react-redux";
 
 const TABS = [
   { title: "Board View", icon: <MdGridView /> },
@@ -28,7 +29,7 @@ const TASK_TYPE = {
 
 const Tasks = () => {
   const params = useParams();
-
+  const { user } = useSelector((state) => state.auth);
   const [selected, setSelected] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -39,7 +40,6 @@ const Tasks = () => {
     isTrashed: "",
     search: "",
   });
-
   return isLoading ? (
     <div className="py-10">
       <Loading />
@@ -49,7 +49,7 @@ const Tasks = () => {
       <div className="flex items-center justify-between mb-4">
         <Title title={status ? `${status} Tasks` : "Tasks"} />
 
-        {!status && (
+        {user?.role === "admin" && (
           <Button
             onClick={() => setOpen(true)}
             label="Create Task"
@@ -78,10 +78,22 @@ const Tasks = () => {
         )}
 
         {selected !== 1 ? (
-          <BoardView tasks={data?.tasks} />
+          user.isAdmin ? (
+            <>
+              <BoardView tasks={data?.tasks} />
+            </>
+          ) : (
+            <>
+              <BoardView tasks={data?.mytask} />
+            </>
+          )
         ) : (
           <div className="w-full">
-            <Table tasks={data?.tasks} />
+            {user.isAdmin ? (
+              <Table tasks={data?.tasks} />
+            ) : (
+              <Table tasks={data?.mytask} />
+            )}
           </div>
         )}
       </Tabs>
