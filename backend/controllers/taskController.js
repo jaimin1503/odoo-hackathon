@@ -53,7 +53,7 @@ export const createTask = async (req, res) => {
 export const getTasks = async (req, res) => {
   try {
     const { stage, isTrashed } = req.query;
-
+    console.log("res inside gettasks",req.query)
     let query = { isTrashed: isTrashed ? true : false };
 
     if (stage) {
@@ -68,10 +68,13 @@ export const getTasks = async (req, res) => {
       .sort({ _id: -1 });
 
     const tasks = await queryResult;
-
+    const mytask = tasks.filter((item) => 
+      item.team.some((member) => member._id.toString() === req.user.userId)
+    );
     res.status(200).json({
       status: true,
       tasks,
+      mytask
     });
   } catch (error) {
     console.log(error);
