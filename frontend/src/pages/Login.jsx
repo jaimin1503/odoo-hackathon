@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../redux/slices/api/authApiSlice";
 import Loading from "../components/Loader";
 import { toast } from "sonner";
-import { setCredentials } from "../redux/slices/authSlice"; // Import setCredentials action creator
+import { setCredentials } from "../redux/slices/authSlice";
+import socket from "../utils/socket";
 
 const Login = () => {
   const { user } = useSelector((state) => state.auth);
@@ -25,6 +26,7 @@ const Login = () => {
     try {
       const result = await login(data).unwrap();
       dispatch(setCredentials(result));
+      socket.emit("userLoggedIn", result._id);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -38,7 +40,7 @@ const Login = () => {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center flex-col lg:flex-row bg-[#f3f4f6]">
-      <div className="w-full md:w-auto flex gap-0 md:gap-40 flex-col md:flex-row items-center justify-center">
+      <div className="w-full lg:w-auto flex gap-0 lg:gap-40 flex-col lg:flex-row items-center justify-center">
         {/* left side */}
         <div className="h-full w-full lg:w-2/3 flex flex-col items-center justify-center">
           <div className="w-full md:max-w-lg 2xl:max-w-3xl flex flex-col items-center justify-center gap-5 md:gap-y-10 2xl:-mt-20">

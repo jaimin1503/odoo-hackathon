@@ -9,6 +9,8 @@ import { useLogoutMutation } from "../redux/slices/api/authApiSlice";
 import { logout } from "../redux/slices/authSlice";
 import AddUser from "./AddUser";
 import ChangePassword from "./ChangePassword";
+import socket from "../utils/socket";
+import { toast } from "sonner";
 
 const UserAvatar = () => {
   const [open, setOpen] = useState(false);
@@ -21,10 +23,12 @@ const UserAvatar = () => {
   const logoutHandler = async () => {
     try {
       await logoutUser().unwrap();
+      socket.emit("userLogOut", user._id);
       dispatch(logout());
       navigate("/login");
     } catch (error) {
       toast.error("Something went wrong");
+      console.log(error);
     }
   };
 
