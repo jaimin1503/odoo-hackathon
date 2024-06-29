@@ -1,6 +1,3 @@
-// import express from "express";
-// import cookieParser from "cookie-parser";
-// import cors from "cors";
 import connect from "./utils/db.js";
 
 // connect();
