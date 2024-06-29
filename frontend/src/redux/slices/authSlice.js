@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { user } from "../../assets/data";
+import socket from "../../utils/socket";
 
 const initialState = {
   user: localStorage.getItem("userInfo")

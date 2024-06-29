@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../redux/slices/api/authApiSlice";
 import Loading from "../components/Loader";
 import { toast } from "sonner";
-import { setCredentials } from "../redux/slices/authSlice"; // Import setCredentials action creator
+import { setCredentials } from "../redux/slices/authSlice";
+import socket from "../utils/socket";
 
 const Login = () => {
   const { user } = useSelector((state) => state.auth);
@@ -25,6 +26,7 @@ const Login = () => {
     try {
       const result = await login(data).unwrap();
       dispatch(setCredentials(result));
+      socket.emit("userLoggedIn", result._id);
       navigate("/");
     } catch (error) {
       console.log(error);
