@@ -18,37 +18,37 @@ const linkData = [
   {
     label: "Dashboard",
     link: "dashboard",
-    icon: <MdDashboard />,
+    icon: <MdDashboard size={20} />,
   },
   {
     label: "Tasks",
     link: "tasks",
-    icon: <FaTasks />,
+    icon: <FaTasks size={20} />,
   },
   {
     label: "Completed",
     link: "/completed",
-    icon: <MdTaskAlt />,
+    icon: <MdTaskAlt size={20} />,
   },
   {
     label: "In Progress",
     link: "/in progress",
-    icon: <MdOutlinePendingActions />,
+    icon: <MdOutlinePendingActions size={20} />,
   },
   {
     label: "To Do",
     link: "/todo",
-    icon: <MdOutlinePendingActions />,
+    icon: <MdOutlinePendingActions size={20} />,
   },
   {
     label: "Team",
     link: "team",
-    icon: <FaUsers />,
+    icon: <FaUsers size={20} />,
   },
   {
     label: "Trash",
     link: "trashed",
-    icon: <FaTrashAlt />,
+    icon: <FaTrashAlt size={18} />,
   },
 ];
 
