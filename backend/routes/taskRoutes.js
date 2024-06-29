@@ -10,6 +10,8 @@ import {
   postTaskActivity,
   trashTask,
   updateTask,
+  setTaskToCompleted,
+  getCompletedTasks
 } from "../controllers/taskController.js";
 import { isAdminRoute, protectRoute } from "../middlewares/authmiddlewares.js";
 
@@ -21,10 +23,11 @@ router.post("/activity/:id", protectRoute, postTaskActivity);
 
 router.get("/dashboard", protectRoute, dashboardStatistics);
 router.get("/", protectRoute, getTasks);
-router.get("/:id", protectRoute, getTask);
-
+router.put("/setcompleted/:id", protectRoute, setTaskToCompleted);
+router.get("/getcompleted",protectRoute,getCompletedTasks);
 router.put("/create-subtask/:id", protectRoute, isAdminRoute, createSubTask);
 router.put("/update/:id", protectRoute, isAdminRoute, updateTask);
+router.get("/:id", protectRoute, getTask);
 router.put("/:id", protectRoute, isAdminRoute, trashTask);
 
 router.delete(

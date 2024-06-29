@@ -348,3 +348,36 @@ export const deleteRestoreTask = async (req, res) => {
     return res.status(400).json({ status: false, message: error.message });
   }
 };
+export const getCompletedTasks=async (req,res)=>{
+  try {
+    const completedTasks=await Task.find({stage:"completed"})
+    return res.status(200).json({
+      completedTasks
+    })
+  } catch (error) {
+    return res.status(404).json({
+      message:"somthing went wrong",
+      error,
+    })
+  }
+
+  
+}
+export const setTaskToCompleted=async(req,res)=>{
+  try {
+    const {id}=req.params
+    const task=await Task.findOneAndUpdate(
+      { _id: id }, 
+      { stage: "completed" },
+      { new: true })
+    return res.status(200).json({
+      message:"set completed",
+      task
+    })
+  } catch (error) {
+    return res.status(400).json({
+      message:"somthing went wrong while set completed ",
+      error
+    })
+  }
+}
