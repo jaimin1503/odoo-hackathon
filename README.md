@@ -1,6 +1,6 @@
 # Organisational Grievance Support System
 
-#Task Me
+# Task Me
 
 This is a web-based application developed using the MERN stack (MongoDB, Express.js, React, Node.js) designed to provide an organizational grievance support system. The application allows employees to report grievances, track the status of their complaints, and for administrators to manage and resolve these grievances efficiently.
 
@@ -95,13 +95,9 @@ We welcome contributions! Please follow these steps to contribute:
 5. Push to the branch (`git push origin feature/your-feature-name`).
 6. Create a new Pull Request.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
-For any inquiries, please contact [your-email@example.com].
+For any inquiries, please contact [jaiminv153@gmail.com].
 
 ---
 
